@@ -34,3 +34,8 @@ int main() {
 	}
     return 0;
 }
+/*
+Time Complexity :
+	the worst & the Avg case >>> O(n2)
+	The best case >>> O(n)
+*/
