@@ -1,0 +1,69 @@
+///// _Malak_A7med_ /////
+#include <iostream>
+#include <vector>
+#define ll long long
+#define Malak ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+#define all(v) v.begin(),v.end()
+#define el "\n"
+using namespace std;
+
+void merge(int arr[], int st, int mid, int end) {
+    int n1 = mid - st + 1, n2 = end - mid;
+    vector<int>left(n1), right(n2);
+    for (int i = 0; i < n1; i++) {
+        left[i] = arr[st + i];
+    }
+    for (int j = 0; j < n2; j++) {
+        right[j] = arr[mid + 1 + j];
+    }
+
+    int i = 0, j = 0, key = st;
+    /*
+    i = 0      >>>>>    initial index of first sub-array
+    j = 0      >>>>>    initial index of second sub-array
+    key = st   >>>>>    initial index of merged sub-array
+    */
+    while (i < n1 && j < n2) {
+        if (left[i] <= right[j]) {
+            arr[key] = left[i];
+            key++;
+            i++;
+        }
+        else {
+            arr[key] = right[j];
+            key++; 
+            j++;
+        }
+    }
+
+    //if there is any element in left or right add it directly (already sorted)
+    while (i < n1) arr[key++] = left[i++];
+    while (j < n2) arr[key++] = right[j++];
+
+}
+
+void mergesort(int arr[], int st, int end) {
+    if (st < end) {
+        int mid = (end + st) / 2;
+        mergesort(arr, st, mid);
+        mergesort(arr, mid + 1, end);
+        merge(arr, st, mid, end);
+    }
+}
+
+int main() {
+    cout << "Enter the size of the array : ";
+    int n; cin >> n;
+    int* arr = new int[n];
+    cout << "Enter the numbers to sort : ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    mergesort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << el;
+    delete[] arr;
+    return 0;
+}
