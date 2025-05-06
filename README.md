@@ -15,8 +15,8 @@ This repository is designed to help me practice and enhance my skills, while als
 
 ## What's will be Included?
 
-- **Sorting algorithms** (e.g., Bubble Sort, Merge Sort, Quick Sort)  
-- **Searching algorithms** (e.g., Binary Search)  
+- **Sorting algorithms** (e.g., Heap Sort, Merge Sort, Insertion Sort, ...)  
+- **Searching algorithms** (e.g., Binary Search, Linear Search, ...)  
 - **Recursion & Backtracking**  
 - **Data Structures** (e.g., Stacks, Queues, Linked Lists, Trees, Graphs)  
 - And more **coming soon...**  
