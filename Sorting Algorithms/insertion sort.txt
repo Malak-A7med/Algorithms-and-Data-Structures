@@ -1,0 +1,36 @@
+///// _Malak_A7med_ /////
+#include <iostream>
+#include <vector>
+#define ll long long
+#define Malak ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+#define all(v) v.begin(),v.end()
+#define el "\n"
+using namespace std;
+
+void insertion(int arr[], int n) {
+	for (int i = 1; i < n; i++) {
+		int key = arr[i];
+		int j = i - 1;
+		while (j >= 0 && key < arr[j]) {
+			arr[j + 1] = arr[j];
+			j--;
+		}
+		arr[j + 1] = key;
+	}
+}
+
+int main() {
+	Malak
+	cout << "Enter number of elements plz : ";
+	int n; cin >> n;
+	int* arr = new int[n];
+	cout << "Enter the elements to sort : ";
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+	}
+	insertion(arr, n);
+	for (int i = 0; i < n; i++) {
+		cout << arr[i] << " ";
+	}
+    return 0;
+}
