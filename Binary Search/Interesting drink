@@ -1,0 +1,34 @@
+///// _Malak_A7med_ /////
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#define ll long long
+#define Malak ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+#define all(v) v.begin(),v.end()
+#define el "\n"
+using namespace std;
+void solve() {
+    int n; cin >> n;
+    vector<int>v(n);
+    for (auto& i : v) cin >> i; //3 10 8 6 11
+    int q; cin >> q;
+    sort(all(v)); //3 6 8 10 11 OMG
+    while (q--) {
+        ll x; cin >> x;
+        auto it = upper_bound(v.begin(), v.end(), x);
+        cout << it - v.begin() << el;
+    }
+}
+
+int main() {
+    Malak
+    int t = 1;  //cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+/*
+https://codeforces.com/group/9QrbarK7qH/contest/443000/problem/A
+*/
