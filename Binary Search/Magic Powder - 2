@@ -1,0 +1,55 @@
+///// _Malak_A7med_ /////
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#define ll long long
+#define Malak ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define el "\n"
+using namespace std;
+bool can(ll mid, int k, int n, vector<int>& need, vector<int>& has) {
+    ll magicneeded = 0;
+    for (int i = 0; i < n; i++) {
+        ll tot = 1LL * need[i] * mid;
+        if (tot > has[i]) {
+            magicneeded += tot - has[i];
+            if (magicneeded > k) return false;
+        }
+    }
+    return k >= magicneeded;
+}
+void solve() {
+    int n, k;
+    cin >> n >> k; //3 1
+    vector<int>need(n), has(n);
+    for (auto& i : need) cin >> i; //2 1 4
+    for (auto& j : has) cin >> j; //11 3 16
+    ll l = 0, r = 2e9, ans = 0, mid;
+    while (l <= r) {
+        mid = (l + r) / 2;
+        if (can(mid, k, n, need, has)) {
+            ans = mid;
+            l = mid + 1;
+        }
+        else {
+            r = mid - 1;
+        }
+    }
+    cout << ans << el;
+}
+
+int main() {
+    Malak
+    int t = 1;
+    //cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+/*
+https://codeforces.com/problemset/problem/670/D2
+*/
