@@ -1,0 +1,38 @@
+///// _Malak_A7med_ /////
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#define all(v) v.begin(),v.end()
+#define el "\n"
+#define Neralotha ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+using namespace std;
+void solve() {
+    int n; cin >> n;
+    vector<int> v(n);
+    for (auto& i : v) {
+        cin >> i;
+    }
+    for (int i = 1; i < n; i++) {
+        v[i] += v[i - 1];
+    }
+    int m; cin >> m;
+    while (m--) {
+        int x; cin >> x;
+        auto it = lower_bound(all(v), x);
+        cout << (it - v.begin()) + 1 << el;
+    }
+}
+
+int main() {
+    Neralotha
+    int t; t = 1;
+    //cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+/*
+https://codeforces.com/contest/474/problem/B
+*/
