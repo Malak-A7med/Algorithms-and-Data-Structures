@@ -1,0 +1,57 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+void solve() {
+    int n, a, b;
+    cin >> n >> a >> b;
+    vector<int> v(n);
+    for (auto &i : v) cin >> i;
+    vector<pair<int, int>> anim(n);
+    for (int i = 0; i < n; i++) {
+        anim[i] = {v[i], i};
+    }
+    sort(all(anim));
+    vector<int> va(n);
+    for (int i = 0; i < n; i++) {
+        va[i] = anim[i].first;
+    }
+    vector<pair<int, int>> p(n); // pred, prey
+
+    for (int i = 0; i < n; i++) {
+        int val = anim[i].first, idx = anim[i].second;
+        
+        int low1 = val - b + 1, high1 = val - a;
+        int l = lower_bound(all(va), low1) - va.begin();
+        int r = upper_bound(all(va), high1) - va.begin();
+        int prey = r - l;
+        
+        int low2 = val + a, high2 = val + b - 1;
+        l = lower_bound(all(va), low2) - va.begin();
+        r = upper_bound(all(va), high2) - va.begin();
+        int pred = r - l;
+
+        p[idx] = {pred, prey};
+    }
+
+    for (auto [pred, prey] : p) {
+        cout << pred << " " << prey << el;
+    }
+}
+
+int main() {
+    MalakA7med
+    int t = 1; //cin>>t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+/*
+https://codeforces.com/gym/105123/problem/D2
+*/
