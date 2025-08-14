@@ -1,0 +1,61 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+
+bool yes(int sz, int need, string str) {
+    vector<int> freq(256, 0); 
+    int dist = 0, n = str.size();
+    for (int i = 0; i < sz; i++) {
+        if (freq[str[i]] == 0) dist++;
+        freq[str[i]]++;
+    }
+    if (dist == need) return true;
+    for (int i = sz; i < n; i++) {
+        freq[str[i - sz]]--;
+        if (freq[str[i - sz]] == 0) dist--;
+        if (freq[str[i]] == 0) dist++;
+        freq[str[i]]++;
+        
+        if (dist == need) return true;
+    }
+    return false;
+}
+
+void solve() {
+    int n; cin>>n;
+    string s; cin>>s;
+    set<char> st;
+    for (char c : s) {
+        st.insert(c);
+    }
+    int l = st.size(), r = n, need = st.size(), ans;
+    while (l <=r) {
+        int mid = l + (r-l) / 2;
+        if (yes(mid, need, s)) {
+            ans = mid;
+            r = mid - 1;
+        }
+        else {
+            l = mid + 1;
+        }
+    }
+    cout << ans << el;
+}
+
+int main() {
+    MalakA7med
+    int t = 1; // cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+/*
+https://codeforces.com/problemset/problem/701/C
+*/
