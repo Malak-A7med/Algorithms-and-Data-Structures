@@ -1,0 +1,53 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+
+bool can(double m, vector<int> &v, int n, int k) {
+    double give = 0.0, need = 0.0;
+    for (int i = 0; i < n; i++) {
+        if (v[i] > m) {
+            give += v[i] - m;
+        }
+        else {
+            need += m - v[i];
+        }
+    }
+    return give * (1.0 - k / 100.0) >= need;
+}
+
+void solve() {
+    int n, k; cin>>n>>k;
+    vector<int>v(n);
+    for (auto &i : v) cin>>i;
+    double l = 0.0, r = *max_element(all(v)), ans;
+    while (r - l > 1e-7) {
+        double mid = (l+r)/2;
+        if (can(mid, v, n, k)) {
+            ans = mid;
+            l = mid;
+        }
+        else {
+            r = mid;
+        }
+    }
+    cout << fixed << setprecision(9) << ans;
+
+}
+
+int main() {
+    MalakA7med
+    int t = 1; //cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+/*
+https://codeforces.com/problemset/problem/68/B
+*/
