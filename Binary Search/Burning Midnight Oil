@@ -1,0 +1,32 @@
+/////// Malak Ahmed ///////
+#include<bits/stdc++.h>
+#define all(x) x.begin(),x.end()
+#define ll long long
+#define el "\n"
+using namespace std;
+int main() {
+    ios::sync_with_stdio(false);cin.tie(nullptr);
+    int t=1; //cin >> t;
+    while (t--) {
+        ll n,k; cin >> n >> k;
+        ll left = 1, right = n, ans=n;
+        while (left <= right) {
+            ll mid = (left + right) / 2;
+            ll cur = mid, total = 0;
+            while (cur > 0) {
+                total += cur;
+                cur /= k;
+            }
+            if (total >= n) {
+                ans = mid;
+                right = mid - 1;
+            } else
+                left = mid + 1;
+        }
+        cout << ans << el;
+    } return 0;
+}
+
+/*
+https://codeforces.com/problemset/problem/165/B
+*/
