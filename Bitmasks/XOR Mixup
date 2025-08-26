@@ -1,3 +1,31 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+void solve() {
+    int n; cin>>n;
+    vector<int> v(n);
+    for (auto &i :v)cin>>i;
+    // cout<< v[0] <<el; // may be the solution directly
+    int xo_r = 0;
+    for (int i = 0; i < n; i++) {
+        xo_r ^= v[i];
+    }
+    cout << (v[0] ^ xo_r) << el;
+}
+
+int main() {
+    MalakA7med
+    int t = 1; cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
 
 /*
 https://codeforces.com/problemset/problem/1698/A
