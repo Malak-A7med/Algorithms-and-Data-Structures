@@ -1,0 +1,54 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+void solve() {
+    int n; cin>>n;
+    vector<ll> v(n+1);
+    vector<vector<ll>> prefbit(32, vector<ll>(n+1, 0));
+    for (int i=1;i<=n;i++)cin>>v[i];
+    for (int b =0; b <=31; b++) {
+        for (int i=1; i<=n; i++) {
+            prefbit[b][i] = prefbit[b][i-1] + ((v[i] >> b)&1);
+        }
+    }
+    int q; cin>>q;
+    while (q--) {
+        int l, k, mid, ans = -1 ; cin>>l>>k;
+        int le = l, ri = n;
+        while (le <= ri) {
+            mid = le + (ri - le) / 2;
+            ll And = 0;
+            for (int i=0; i<=31; i++) {
+                int numof_on_bits = prefbit[i][mid] - prefbit[i][l - 1];
+                if (numof_on_bits == mid - l + 1) And += (1<<i);
+            }
+            if (And >= k) {
+                ans = mid;
+                le = mid + 1;
+            }
+            else {
+                ri = mid - 1;
+            }
+        }
+        cout<<ans<<" ";
+    }
+    cout<<el;
+}
+
+int main() {
+    MalakA7med
+    int t = 1; cin>>t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+/*
+https://codeforces.com/contest/1878/problem/E
+*/
