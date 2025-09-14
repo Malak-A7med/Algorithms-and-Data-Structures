@@ -1,0 +1,37 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+int n;
+void BT(string s) {
+    if (s.size() == n) {
+        cout << s << el;
+        return;
+    }
+    BT(s + "0");
+    BT(s + "1");
+
+}
+
+
+void solve() {
+    cin>>n;
+    BT("");
+  }
+int main() {
+    MalakA7med
+    int t = 1; cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+
+/*
+https://codeforces.com/group/gA8A93jony/contest/270592/problem/A
+*/
