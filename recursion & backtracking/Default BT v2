@@ -1,0 +1,49 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+
+int n, m;
+string grid[101];
+int Backtrack(int x, int y) {
+    if (x == n-1 && y == m-1) {
+        return 1;
+    }
+    int cnt = 0;
+    if (y + 1 < m && grid[x][y+1] != '#') {
+        cnt += Backtrack(x, y+1);
+        }
+
+    if (x + 1 < n && grid[x+1][y] != '#') {
+        cnt += Backtrack(x+1, y);
+    }
+    return cnt;
+}
+
+void solve() {
+    cin >> n >> m;
+    for (int i = 0; i < n; i++) cin >> grid[i];
+    cout << Backtrack(0, 0) << el;
+}
+/*
+    3 3
+    S..
+    .#.
+    ..E
+ans = 2
+    RRDD
+    DDRR
+ */
+
+int main() {
+    MalakA7med
+    int t = 1; //cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
