@@ -1,0 +1,46 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+int n, m;
+int a[15][15];
+vector<int> path;
+vector<vector<int>> allPaths;
+
+void Backtrack(int i, int j) {
+    path.push_back(a[i][j]);
+    if (i == n-1 && j == m-1) {
+        allPaths.push_back(path);
+        path.pop_back();
+        return;
+    }
+    if (i + 1 < n) Backtrack(i+1, j);
+    if (j + 1 < m) Backtrack(i, j+1);
+    path.pop_back();
+}
+
+void solve() {
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            cin >> a[i][j];
+    Backtrack(0, 0);
+    sort(all(allPaths));
+    for (auto &p : allPaths) {
+        for (int x : p) cout << x << " ";
+        cout << el;
+    }
+}
+
+int main() {
+    MalakA7med
+    int t = 1;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
