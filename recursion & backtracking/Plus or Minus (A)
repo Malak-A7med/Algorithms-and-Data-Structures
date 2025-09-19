@@ -1,0 +1,55 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+int n;
+vector<int> a;
+int mn = 1e9;
+
+void Backtrack(int i, int sum, int cnt) {
+    if (i == n) {
+        if (sum == 0) {
+            mn = min(mn, cnt);
+        }
+        return;
+    }
+    Backtrack(i + 1, sum + a[i], cnt);
+    Backtrack(i + 1, sum - a[i], cnt + 1);
+}
+
+int BacktrackSolve() {
+    Backtrack(1, a[0], 0);
+    return mn == 1e9 ? -1 : mn;
+}
+
+void solve() {
+    cin >> n;
+    a.resize(n);
+    cin >> a[0];
+    char ch;
+    for (int i = 1; i < n; i++) {
+        cin >> ch >> a[i];
+        if ( ch == '-') {
+            a[i] *= -1;
+        }
+    }
+
+    cout << BacktrackSolve() << el;
+}
+
+int main() {
+    MalakA7med
+    int t = 1; //cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+/*
+https://vjudge.net/contest/747640#problem/E
+*/
