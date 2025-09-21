@@ -1,0 +1,96 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define el "\n"
+using namespace std;
+
+//__________Way1__________
+void edgelist_By_Vec() {
+    int n, e; cin >> n >> e;
+    vector<pair<int, int>> edge_list(e);
+
+    for (int i=0; i<e; i++) {
+        cin >> edge_list[i].first >> edge_list[i].second;
+    }
+
+    cout << el;
+
+    for (int i=0; i<e; i++) {
+        cout << edge_list[i].first << " " << edge_list[i].second << el;
+    }
+}
+
+void edgelist_By_Set() {
+    //find >> log(e)
+    //all >> O(elog(e) + qlog(e))
+    int n, e; cin >> n >> e;
+    set<pair<int, int>>edge_list;
+
+    for (int i=0; i<e; i++) {
+        int u, v; cin >> u >> v;
+        edge_list.insert({u, v});
+        edge_list.insert({v, u});
+    }
+    int q; cin>>q;
+    while (q--) {
+        int u, v; cin >>u >> v;
+        if (edge_list.find({u, v}) == edge_list.end()) {
+            cout << "NO" << el;
+        }
+        else {
+            cout << "YES" << el;
+        }
+    }
+}
+
+//__________Way2__________
+void adgacency_matrix() {
+    int n, e; cin >> n >> e;
+    vector<vector<int>> mat(n + 1, vector<int>(n + 1, 0));
+    for (int i=1; i<=n; i++) {
+        int u, v; cin>>u>>v;
+        mat[u][v] = 1;
+        mat[v][u] = 1;
+    }
+
+    for (int i=1; i<=n; i++) {
+        for (int j=1; j<=n; j++) {
+            cout << mat[i][j] << " ";
+        }
+        cout << el;
+    }
+}
+
+//__________Way3__________
+void adgacency_list() {
+    int n, e; cin >> n >> e;
+    vector<vector<int>> adj(n + 1);
+    for (int i=1; i<=n; i++) {
+        int u, v; cin>>u>>v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    for (int i=1; i<=n; i++) {
+        cout << i << " >> ";
+        for (auto u : adj[i]) {
+            cout << " " << u << " ";
+        }
+        cout << el;
+    }
+}
+
+int main() {
+    MalakA7med
+    int t = 1; //cin >> t;
+    while (t--) {
+        //edgelist_By_Vec();
+        //edgelist_By_Set();
+        //adgacency_matrix();
+        adgacency_list();
+    }
+    return 0;
+}
