@@ -1,0 +1,62 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+
+vector<vector<int>> adj;
+vector<int> team;
+
+bool DFS(int u, int c) {
+    team[u] = c;
+    for (auto v : adj[u]) {
+        if (team[v] == 0) {
+            if (!DFS(v, 3 - c)) return 0;
+        } else if (team[v] == team[u]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void DebugOrDie() {
+    int n, m; cin >> n >> m;
+    adj.assign(n + 1, {});
+    team.assign(n + 1, 0);
+
+    for (int i = 0; i < m; i++) {
+        int u, v; cin >> u >> v;
+        adj[u].pb(v);
+        adj[v].pb(u);
+    }
+
+    for (int i = 1; i <= n; i++) {
+        if (team[i] == 0) {
+            if (!DFS(i, 1)) {
+                cout << "IMPOSSIBLE" << el;
+                return;
+            }
+        }
+    }
+
+    for (int i = 1; i <= n; i++) {
+        cout << team[i] << " ";
+    }
+    cout << el;
+}
+
+int main() {
+    MalakA7med
+    int t = 1; //cin >> t;
+    while (t--) {
+        DebugOrDie();
+    }
+    return 0;
+}
+/*
+https://vjudge.net/contest/749601#problem/H
+*/
