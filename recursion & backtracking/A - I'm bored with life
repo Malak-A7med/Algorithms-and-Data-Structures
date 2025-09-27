@@ -1,0 +1,26 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+void DebugOrDie() {
+    ll A, B;
+    cin >> A >> B;
+    ll x = min(A, B);
+    ll ans = 1;
+    for (ll i = 1; i <= x; i++) ans *= i;
+    cout << ans << el;
+}
+
+int main() {
+    MalakA7med
+    int t = 1; // cin >> t;
+    while (t--) {
+        DebugOrDie();
+    }
+    return 0;
+}
