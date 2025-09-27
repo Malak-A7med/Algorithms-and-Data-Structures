@@ -1,0 +1,57 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+
+int n, m;
+vector<string> g;
+vector<vector<int>> vis;
+int dx[4] = {1, -1, 0, 0};
+int dy[4] = {0, 0, 1, -1};
+
+void dfs(int x, int y) {
+    vis[x][y] = 1;
+
+    for (int k = 0; k < 4; k++) {
+        int nx = x + dx[k];
+        int ny = y + dy[k];
+
+        if (nx >= 0 && nx < n && ny >= 0 && ny < m && !vis[nx][ny] && g[nx][ny] == '.') {
+            dfs(nx, ny);
+        }
+    }
+}
+
+void DebugOrDie() {
+    cin >> n >> m;
+    g.resize(n);
+    vis.assign(n, vector<int>(m, 0));
+    for (int i = 0; i<n; i++) cin >> g[i];
+
+    int ans = 0;
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<m; j++) {
+            if (!vis[i][j] && g[i][j] == '.') {
+                dfs(i, j);
+                ans++;
+            }
+        }
+    }
+
+    cout << ans << el;
+}
+
+int main() {
+    MalakA7med
+    int t = 1; // cin >> t;
+    while (t--) {
+        DebugOrDie();
+    }
+    return 0;
+}
+// https://vjudge.net/contest/749601#problem/G
