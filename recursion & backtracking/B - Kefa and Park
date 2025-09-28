@@ -1,0 +1,59 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+
+int n, m;
+vector<int> cat;
+vector<vector<int>> adj;
+int ans = 0;
+
+void dfs(int u, int p, int consec) {
+    if (cat[u]) consec++;
+    else consec = 0;
+
+    if (consec > m) return;
+
+    bool isLeaf = true;
+    for (int v : adj[u]) {
+        if (v == p) continue;
+        isLeaf = false;
+        dfs(v, u, consec);
+    }
+
+    if (isLeaf) ans++;
+}
+
+void DebugOrDie() {
+    cin >> n >> m;
+    cat.resize(n + 1);
+    adj.assign(n + 1, {});
+
+    for (int i = 1; i <= n; i++) cin >> cat[i];
+
+    for (int i = 0; i < n - 1; i++) {
+        int x, y; cin >> x >> y;
+        adj[x].pb(y);
+        adj[y].pb(x);
+    }
+
+    ans = 0;
+    dfs(1, -1, 0);
+    cout << ans << el;
+}
+
+int main() {
+    MalakA7med
+    int t = 1; // cin >> t;
+    while (t--) {
+        DebugOrDie();
+    }
+    return 0;
+}
+
+// https://codeforces.com/contest/580/problem/C
