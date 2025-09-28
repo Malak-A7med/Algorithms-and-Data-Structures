@@ -7,13 +7,16 @@
 #define pb push_back
 #define el "\n"
 using namespace std;
+ll fact(ll n) {
+    if (n <= 1) return 1;
+    return n * fact(n - 1);
+}
+
 void DebugOrDie() {
     ll A, B;
     cin >> A >> B;
     ll x = min(A, B);
-    ll ans = 1;
-    for (ll i = 1; i <= x; i++) ans *= i;
-    cout << ans << el;
+    cout << fact(x) << el;
 }
 
 int main() {
