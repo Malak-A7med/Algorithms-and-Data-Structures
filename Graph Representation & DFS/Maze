@@ -1,0 +1,75 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+int dx[4] = {1, -1, 0, 0};
+int dy[4] = {0, 0, 1, -1};
+int n, m, k;
+vector<string> g;
+vector<vector<int>> vis;
+int tot = 0, keep;
+void dfs(int x, int y, int &cnt) {
+    if (cnt == keep) return;
+    vis[x][y] = 1;
+    cnt++;
+    for (int d=0; d<4; d++) {
+        int nx = x+dx[d], ny = y+dy[d];
+        if (nx<0 || ny<0 || nx>=n || ny>=m) continue;
+        if (!vis[nx][ny] && g[nx][ny]=='.') {
+            dfs(nx, ny, cnt);
+            if (cnt == keep) return;
+        }
+    }
+}
+
+void DebugOrDie() {
+    cin >> n >> m >> k;
+    g.resize(n);
+    for (int i=0; i<n; i++) {
+        cin >> g[i];
+        for (int j=0; j<m; j++) {
+            if (g[i][j] == '.') tot++;
+        }
+    }
+
+    keep = tot - k;
+
+    vis.assign(n, vector<int>(m,0));
+    int cnt = 0;
+    bool st = false;
+
+    for (int i=0; i<n && !st; i++) {
+        for (int j=0; j<m && !st; j++) {
+            if (g[i][j] == '.') {
+                dfs(i, j, cnt);
+                st = true;
+            }
+        }
+    }
+
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<m; j++) {
+            if (g[i][j] == '.' && !vis[i][j]) {
+                g[i][j] = 'X';
+            }
+        }
+    }
+
+    for (int i=0; i<n; i++) {
+        cout << g[i] << el;
+    }
+}
+
+int main() {
+    MalakA7med
+    int t = 1; // cin >> t;
+    while (t--) {
+        DebugOrDie();
+    }
+    return 0;
+}
