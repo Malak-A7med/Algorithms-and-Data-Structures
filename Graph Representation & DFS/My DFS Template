@@ -1,0 +1,44 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+int n, m;
+vector<vector<int>> adj;
+vector<int> vis;
+
+void dfs(int u) {
+    vis[u] = 1;
+    for (auto v : adj[u]) {
+        if (!vis[v])
+            dfs(v);
+    }
+}
+
+void DebugOrDie() {
+    cin >> n >> m;
+    adj.assign(n + 1, {});
+    vis.assign(n + 1, 0);
+
+    for (int i = 1; i <= m; i++) {
+        int u, v; cin >> u >> v;
+        adj[u].pb(v);
+        adj[v].pb(u);
+    }
+
+ dfs(1);
+
+}
+
+int main() {
+    MalakA7med
+    int tt = 1; // cin >> tt;
+    while (tt--) {
+        DebugOrDie();
+    }
+    return 0;
+}
