@@ -1,0 +1,53 @@
+///// _Malak_A7med_ /////
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+
+int n;
+vector<vector<int>> adj;
+vector<int> vis;
+
+void dfs(int x) {
+    vis[x] = 1;
+    for (auto v : adj[x]) {
+        if (!vis[v]) dfs(v);
+    }
+}
+
+void DebugOrDie() {
+    cin >> n;
+    vector<int> p(n + 1);
+    adj.assign(n + 1, {});
+    vis.assign(n + 1, 0);
+
+    for (int i = 1; i <= n; i++) {
+        cin >> p[i];
+        if (p[i] != i) { 
+            adj[i].pb(p[i]);
+            adj[p[i]].pb(i);
+        }
+    }
+
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (!vis[i]) {
+            cnt++;
+            dfs(i);
+        }
+    }
+
+    cout << cnt << el;
+}
+
+int main() {
+    MalakA7med
+    DebugOrDie();
+    return 0;
+}
+
+// https://vjudge.net/contest/749601#problem/W
