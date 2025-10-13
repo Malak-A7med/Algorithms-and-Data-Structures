@@ -1,0 +1,94 @@
+/*================================================================================================================================================
+                      ███╗   ███╗  █████╗  ██╗       █████╗  ██╗   ██╗        █████╗  ██╗  ██╗ ███╗   ███╗ ███████╗ ██████╗
+                      ████╗ ████║ ██╔══██╗ ██║      ██╔══██╗ ██║  ██╔╝       ██╔══██╗ ██║  ██║ ████╗ ████║ ██╔════╝ ██   ██╗
+                      ██╔████╔██║ ███████║ ██║      ███████║ █████╔╝         ███████║ ███████║ ██╔████╔██║ █████╗   ██    ╔╝
+                      ██║╚██╔╝██║ ██╔══██║ ██║      ██╔══██║ ██╔═██╗         ██╔══██║ ██╔══██║ ██║╚██╔╝██║ ██╔══╝   ██   ██╗
+                      ██║ ╚═╝ ██║ ██║  ██║ ███████╗ ██║  ██║ ██║  ██╗        ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ███████╗ ██║  ██║
+                      ╚═╝     ╚═╝ ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝        ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚══════╝ ╚═════╝
+
+                                                         _____M A L A K   A 7 M E D_____
+=================================================================================================================================================*/
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+int n, m;
+vector<string> grid;
+vector<vector<int>> dist;
+vector<vector<pair<int,int>>> p;
+int dx[4] = {1, -1, 0, 0};
+int dy[4] = {0, 0, 1, -1};
+
+bool valid(int x, int y) {
+    return x >= 0 && x < n && y >= 0 && y < m && grid[x][y] != '#';
+}
+void BFS() {
+    cin >> n >> m;
+    grid.resize(n);
+    for (int i = 0; i < n; i++) cin >> grid[i];
+
+    dist.assign(n, vector<int>(m, -1));
+    p.assign(n, vector<pair<int,int>>(m, {-1, -1}));
+    queue<pair<int,int>> q;
+    pair<int,int> st, end;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (grid[i][j] == 'A') st = {i, j};
+            if (grid[i][j] == 'B') end = {i, j};
+        }
+    }
+
+    q.push(st);
+    dist[st.first][st.second] = 0;
+
+    while (!q.empty()) {
+        int x, y;
+        x = q.front().first, y = q.front().second;
+        q.pop();
+
+        for (int k = 0; k < 4; k++) {
+            int nx = x + dx[k], ny = y + dy[k];
+            if (valid(nx, ny) && dist[nx][ny] == -1) {
+                dist[nx][ny] = dist[x][y] + 1;
+                p[nx][ny] = {x, y};
+                q.push({nx, ny});
+            }
+        }
+    }
+    if (dist[end.first][end.second] == -1) {
+        cout << "NO" << el;
+        return;
+    }
+
+    cout << "YES" << el << dist[end.first][end.second] << el;
+
+    string path;
+    pair<int,int> cur = end;
+    char dir[4] = {'D','U','R','L'};
+    while (cur != st) {
+        pair<int,int> pr = p[cur.first][cur.second];
+        for (int k = 0; k < 4; k++) {
+            if (pr.first + dx[k] == cur.first && pr.second + dy[k] == cur.second)
+                path += dir[k];
+        }
+        cur = pr;
+    }
+    reverse(all(path));
+    cout << path << el;
+
+
+}
+
+int main() {
+    MalakA7med
+    int tt = 1; //cin >> tt;
+    while (tt--) BFS();
+    return 0;
+}
+
+//https://vjudge.net/contest/754315#problem/A
