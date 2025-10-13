@@ -1,0 +1,85 @@
+/*========================================================================================================================
+          ███╗   ███╗  █████╗  ██╗       █████╗  ██╗   ██╗        █████╗  ██╗  ██╗ ███╗   ███╗ ███████╗ ██████╗
+          ████╗ ████║ ██╔══██╗ ██║      ██╔══██╗ ██║  ██╔╝       ██╔══██╗ ██║  ██║ ████╗ ████║ ██╔════╝ ██   ██╗
+          ██╔████╔██║ ███████║ ██║      ███████║ █████╔╝         ███████║ ███████║ ██╔████╔██║ █████╗   ██    ╔╝
+          ██║╚██╔╝██║ ██╔══██║ ██║      ██╔══██║ ██╔═██╗         ██╔══██║ ██╔══██║ ██║╚██╔╝██║ ██╔══╝   ██   ██╗
+          ██║ ╚═╝ ██║ ██║  ██║ ███████╗ ██║  ██║ ██║  ██╗        ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ███████╗ ██║  ██║
+          ╚═╝     ╚═╝ ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝        ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚══════╝ ╚═════╝
+
+                                             _____M A L A K   A 7 M E D_____
+========================================================================================================================*/
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+
+int n, m;
+vector<string> grid;
+int dx[] = {0, 0, -1, 1, 1, 1, -1, -1};
+int dy[] = {-1, 1, 0, 0, 1, -1, 1, -1};
+bool valid(int x, int y) {return x>=0 && x<n && y>=0 && y<m && grid[x][y]=='.';}
+
+void BFS() {
+    int n, m;
+    if (!(cin >> n >> m)) return;
+
+    vector<vector<int>> adj(n + 1);
+    for (int i = 0; i < m; ++i) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].pb(b);
+        adj[b].pb(a);
+    }
+
+    vector<int> par(n + 1, -1);
+    vector<int> dist(n + 1, -1);
+    queue<int> q;
+
+    dist[1] = 0;
+    par[1] = 0;
+    q.push(1);
+
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        if (u == n) break;
+        for (int v : adj[u]) {
+            if (dist[v] == -1) {
+                dist[v] = dist[u] + 1;
+                par[v] = u;
+                q.push(v);
+            }
+        }
+    }
+
+    if (dist[n] == -1) {
+        cout << "IMPOSSIBLE" << el;
+        return;
+    }
+
+    vector<int> path;
+    for (int cur = n; cur != 0; cur = par[cur]) {
+        path.push_back(cur);
+        if (cur == 1) break;
+    }
+    reverse(path.begin(), path.end());
+
+    cout << path.size() << el;
+    for (int i = 0; i < (int)path.size(); ++i) {
+        if (i) cout << ' ';
+        cout << path[i];
+    }
+    cout << el;
+}
+
+
+int main() {
+    MalakA7med
+    int tt = 1; //cin >> tt;
+    while (tt--) BFS();
+    return 0;
+}
+// https://vjudge.net/contest/754315#problem/B
