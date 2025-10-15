@@ -1,0 +1,87 @@
+/*========================================================================================================================
+          ███╗   ███╗  █████╗  ██╗       █████╗  ██╗   ██╗        █████╗  ██╗  ██╗ ███╗   ███╗ ███████╗ ██████╗
+          ████╗ ████║ ██╔══██╗ ██║      ██╔══██╗ ██║  ██╔╝       ██╔══██╗ ██║  ██║ ████╗ ████║ ██╔════╝ ██   ██╗
+          ██╔████╔██║ ███████║ ██║      ███████║ █████╔╝         ███████║ ███████║ ██╔████╔██║ █████╗   ██    ╔╝
+          ██║╚██╔╝██║ ██╔══██║ ██║      ██╔══██║ ██╔═██╗         ██╔══██║ ██╔══██║ ██║╚██╔╝██║ ██╔══╝   ██   ██╗
+          ██║ ╚═╝ ██║ ██║  ██║ ███████╗ ██║  ██║ ██║  ██╗        ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ███████╗ ██║  ██║
+          ╚═╝     ╚═╝ ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝        ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚══════╝ ╚═════╝
+
+                                           _____ M A L A K   A 7 H M E D █████_____
+========================================================================================================================*/
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+
+int n, k;
+vector<string> grid;
+int dx[] = {0, 0, -1, 1, 1, 1, -1, -1};
+int dy[] = {-1, 1, 0, 0, 1, -1, 1, -1};
+bool valid(int x, int y) {return x>=0 && x<n && y>=0 && y<k && grid[x][y]=='.';}
+
+void BFS() {
+    cin >> n >> k;
+    vector<int> fr(k);
+    for (int i = 0; i < k; ++i) cin >> fr[i];
+    vector<vector<int>> adj(n + 1);
+    for (int i = 0; i < n - 1; ++i) {
+        int a, b;  cin >> a >> b;
+        adj[a].pb(b);
+        adj[b].pb(a);
+    }
+
+    vector<int> distF(n + 1, 1e9);
+    queue<int> q;
+    for (int x : fr) {
+        distF[x] = 0;
+        q.push(x);
+    }
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        for (int v : adj[u]) {
+            if (distF[v] > distF[u] + 1) {
+                distF[v] = distF[u] + 1;
+                q.push(v);
+            }
+        }
+    }
+
+    vector<int> distV(n + 1, 1e9);
+    queue<int> qv;
+    distV[1] = 0;
+    qv.push(1);
+    while (!qv.empty()) {
+        int u = qv.front(); qv.pop();
+        for (int v : adj[u]) {
+            if (distV[v] > distV[u] + 1) {
+                distV[v] = distV[u] + 1;
+                qv.push(v);
+            }
+        }
+    }
+
+    bool ok = 0;
+    for (int i = 2; i <= n; ++i) {
+        if (adj[i].size() == 1 && distV[i] < distF[i]) {
+            ok = 1;
+            break;
+        }
+    }
+    cout << (ok ? "YES\n" : "NO\n");
+}
+
+int main() {
+    MalakA7med
+    int tt = 1; cin >> tt;
+    while (tt--) {
+        BFS();
+    }
+    return 0;
+}
+
+
+// https://vjudge.net/contest/754315#problem/I
