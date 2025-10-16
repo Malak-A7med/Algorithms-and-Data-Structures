@@ -1,0 +1,88 @@
+/*========================================================================================================================
+          ███╗   ███╗  █████╗  ██╗       █████╗  ██╗   ██╗        █████╗  ██╗  ██╗ ███╗   ███╗ ███████╗ ██████╗
+          ████╗ ████║ ██╔══██╗ ██║      ██╔══██╗ ██║  ██╔╝       ██╔══██╗ ██║  ██║ ████╗ ████║ ██╔════╝ ██   ██╗
+          ██╔████╔██║ ███████║ ██║      ███████║ █████╔╝         ███████║ ███████║ ██╔████╔██║ █████╗   ██    ╔╝
+          ██║╚██╔╝██║ ██╔══██║ ██║      ██╔══██║ ██╔═██╗         ██╔══██║ ██╔══██║ ██║╚██╔╝██║ ██╔══╝   ██   ██╗
+          ██║ ╚═╝ ██║ ██║  ██║ ███████╗ ██║  ██║ ██║  ██╗        ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ███████╗ ██║  ██║
+          ╚═╝     ╚═╝ ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝        ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚══════╝ ╚═════╝
+
+                                           _____ M A L A K   A 7 M E D █████_____
+========================================================================================================================*/
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+
+int n, m;
+vector<string> grid;
+int dx[] = {0, 0, -1, 1, 1, 1, -1, -1};
+int dy[] = {-1, 1, 0, 0, 1, -1, 1, -1};
+bool valid(int x, int y) {return x>=0 && x<n && y>=0 && y<m && grid[x][y]=='.';}
+
+void BFS() {
+    int x0, y0, x1, y1;
+    cin >> x0 >> y0 >> x1 >> y1;
+    cin >> n;
+    map<ll, vector<pair<ll,ll>>> rows;
+    for (int i = 0; i < n; ++i) {
+        ll r, a, b;
+        cin >> r >> a >> b;
+        rows[r].pb({a, b});
+    }
+
+    set<pair<ll, ll>> alwd;
+    for (auto &it : rows) {
+        ll r = it.first;
+        for (auto &seg : it.second) {
+            for (ll c = seg.first; c <= seg.second; c++) {
+                alwd.insert({r, c});
+            }
+        }
+    }
+
+    queue<pair<ll, ll>> q;
+    map<pair<ll, ll>, ll> dist;
+
+    pair<ll, ll> st = {x0, y0};
+    pair<ll, ll> tar = {x1, y1};
+
+    q.push(st);
+    dist[st] = 0;
+
+    while (!q.empty()) {
+        auto [x, y] = q.front();
+        q.pop();
+
+        if (x == x1 && y == y1) {
+            cout << dist[{x, y}] << el;
+            return;
+        }
+
+        for (int i = 0; i < 8; ++i) {
+            ll nx = x + dx[i];
+            ll ny = y + dy[i];
+            pair<ll, ll> next = {nx, ny};
+
+            if (alwd.count(next) && !dist.count(next)) {
+                dist[next] = dist[{x, y}] + 1;
+                q.push(next);
+            }
+        }
+    }
+
+    cout << -1 << el;
+}
+
+
+int main() {
+    MalakA7med
+    int tt = 1; // cin >> tt;
+    while (tt--) {
+        BFS();
+    }
+    return 0;
+}
