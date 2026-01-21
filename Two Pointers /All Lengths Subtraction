@@ -1,3 +1,51 @@
+/*========================================================================================================================
+
+          ███╗   ███╗  █████╗  ██╗       █████╗  ██╗   ██╗        █████╗  ██╗  ██╗ ███╗   ███╗ ███████╗ ██████╗
+          ████╗ ████║ ██╔══██╗ ██║      ██╔══██╗ ██║  ██╔╝       ██╔══██╗ ██║  ██║ ████╗ ████║ ██╔════╝ ██   ██╗
+          ██╔████╔██║ ███████║ ██║      ███████║ █████╔╝         ███████║ ███████║ ██╔████╔██║ █████╗   ██    ╔╝
+          ██║╚██╔╝██║ ██╔══██║ ██║      ██╔══██║ ██╔═██╗         ██╔══██║ ██╔══██║ ██║╚██╔╝██║ ██╔══╝   ██   ██╗
+          ██║ ╚═╝ ██║ ██║  ██║ ███████╗ ██║  ██║ ██║  ██╗        ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ███████╗ ██║  ██║
+          ╚═╝     ╚═╝ ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝        ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚══════╝ ╚═════╝
+
+                                           _____ M A L A K   A 7 M E D █████_____
+========================================================================================================================*/
+#include <bits/stdc++.h>
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define MalakA7med ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
+#define ll long long
+#define pb push_back
+#define el "\n"
+using namespace std;
+void solve() {
+		int n;  cin >> n;
+		vector<int> p(n);
+		for(int i=0;i<n;i++) cin >> p[i];
+		vector<int> pos(n+1);
+		for(int i=0;i<n;i++) pos[p[i]] = i;
+
+		int l = pos[n], r = pos[n];
+		bool ans = true;
+
+		for(int val = n-1; val >= 1; val--) {
+			int idx = pos[val];
+			if(idx == l-1) l = idx;
+			else if(idx == r+1) r = idx;
+			else {
+				ans = false;
+				break;
+			}
+		}
+
+		cout << (ans ? "YES\n" : "NO\n");
+	}
+
+int main() {
+	int t; cin >> t;
+	while (t--) {
+		solve();
+	}
+}
 
 
 /*https://codeforces.com/problemset/problem/2143/A*/
